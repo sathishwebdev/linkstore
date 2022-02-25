@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {BrowserRouter, NavLink, Route, Routes, useLocation, useNavigate} from 'react-router-dom';
-import Shorty from './views/shorty';
+import Profile from './views/profile';
 import Verify from './views/Verify';
 import Login from './views/login';
 import { useSelector } from 'react-redux';
@@ -31,7 +31,7 @@ function App(props) {
         <Route exact path="/" element={<Home {...props} />}/>
         <Route exact path="/user/login" element ={<Login />} />
         <Route exact path="/user/signup" element ={<SignUp />} />
-        <Route exact path="/user/dashboard" element={<> <Shorty {...props}/></>} />
+        <Route exact path="/user/dashboard" element={<> <Profile {...props}/></>} />
         <Route exact path="/user/verify" element={<Verify mailId={user_login ? user_login.email : ''} {...props} />}/>
         <Route exact path='/:id/verify/k' element={<Verification />} /> 
         <Route exact path ="/user/forgetpassword" element={<ForgetPassword />} />

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
+import UserDetails from "../components/profile/userDetails";
 
 
-const Shorty = (props) =>{
+const Profile = (props) =>{
     const{ user_login } = useSelector(
         (state) => state.users.login
       );
@@ -19,13 +20,13 @@ const Shorty = (props) =>{
       },[user_login])
     return(
         <div className="App">
-            <div className="header " style={{minHeight:"100vh"}} >
+            <div className="header " style={{minHeight:"100vh", borderRadius:"0 0 0 0"}} >
                 <div className="col-12" >
-                    
+                    <UserDetails />
                 </div>
             </div>
         </div>
         )
 }
 
-export default Shorty
+export default Profile

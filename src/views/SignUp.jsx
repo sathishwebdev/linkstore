@@ -25,7 +25,7 @@ function SignUp() {
 
   
 
-  const { loading, error, success } = useSelector(
+  const { loading, error, success, response } = useSelector(
   (state) => state.users.create);
     
   const { user_login } = useSelector(
@@ -67,13 +67,13 @@ function SignUp() {
     }
     
     if(success){
-      const message = "Account Created!"
-      dispatch(setSnackbar(true, "success", message))
+      
+      dispatch(setSnackbar(true, "success", response.message))
       dispatch({type: UserActionTypes.REGISTER.RESET})
       navigate('/user/login')
     }
     if(error){
-      dispatch(setSnackbar(true, "success", "Error !"))
+      dispatch(setSnackbar(true, "error", "Error !"))
     }
 
   }, [user_login, dispatch, loading, error, success]);
@@ -91,6 +91,7 @@ function SignUp() {
 
                 <h1> SIGN UP </h1>
                 {error && <Message type="error" message={error}/>}
+                {response && <Message type = {response.error ? "error"  : "success"} message = {response.message}/>}
                 <CustomizedSnackbars />
 
                 <Input

@@ -7,7 +7,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL + "/api/users"
 
 export const logout = () => async (dispatch) => {
   dispatch({ type: UserActionTypes.LOGIN.RESET });
-  localStorage.removeItem("shorty-user");
+  localStorage.removeItem("linkstore-user");
 };
 
 export const loginUser = (values) => async (dispatch) => {
@@ -30,7 +30,7 @@ export const loginUser = (values) => async (dispatch) => {
       payload: userInfo,
     });
 
-    localStorage.setItem("shorty-user", JSON.stringify(userInfo));
+    localStorage.setItem("linkstore-user", JSON.stringify(userInfo));
   } catch (error) {
     dispatch({
       type: UserActionTypes.LOGIN.ERROR,
@@ -48,10 +48,11 @@ export const registerUser = (values) => async (dispatch) => {
       type: UserActionTypes.REGISTER.REQUEST,
     });
 
-    await axios.post(`${BASE_URL}/register`, values);
+    let {data} = await axios.post(`${BASE_URL}/register`, values);
 
     dispatch({
       type: UserActionTypes.REGISTER.SUCCESS,
+      payload: data
     });
   } catch (error) {
     dispatch({

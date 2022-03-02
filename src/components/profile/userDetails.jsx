@@ -15,13 +15,16 @@ function UserDetails() {
         }
     },[user_login])
   return (
-    <div className="pad d-flex justify-content-center align-items-center" >
+    <div className="pad d-flex justify-content-center align-items-center flex-wrap" >
         {user_login ? 
         <>
             <div className="pad" >
                 <Avatar sx={{
-                    height:"200px",
-                    width: '200px'
+                    height:"20vw",
+                    width: '20vw',
+                    maxWidth: "200px",
+                    maxHeight:"200px"
+
                 }} />
             </div>
 
@@ -32,10 +35,10 @@ function UserDetails() {
 
             <div className="pad">
                 <Share sx={{
-                    fontSize :"40px"
+                    fontSize :"30px"
                 }} />
                 <AnalyticsOutlined sx={{
-                    fontSize :"40px"
+                    fontSize :"30px"
                 }}  />
             </div>
 

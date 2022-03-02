@@ -3,16 +3,16 @@ import { combineReducers } from "redux";
 
 // URL LIST
 
-const urlListReducer = (state = {urls: []}, action) =>{
+const urlListReducer = (state = {links: null}, action) =>{
     switch (action.type){
         case UrlActionTypes.URL_LIST.REQUEST:
             return {loading : true};
         case UrlActionTypes.URL_LIST.SUCCESS:
-            return {loading: false, urls: action.payload};
+            return {loading: false, links: action.payload};
         case UrlActionTypes.URL_LIST.ERROR:
             return {loading: false, error: action.payload};
         case UrlActionTypes.URL_LIST.RESET:
-            return {urls:[]}
+            return {links: null}
         default:
             return state;
     }

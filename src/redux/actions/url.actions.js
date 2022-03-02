@@ -12,7 +12,7 @@ export const getUrlsList = (value) => async (dispatch, getState) =>{
             type: UrlActionTypes.URL_LIST.REQUEST
         })
 
-        const {data} = await axios.get(`${BASE_URL}/api/shorty/?user=${value}`, getConfig(getState()))
+        const {data} = await axios.get(`${BASE_URL}/api/links/?userId=${value}`, getConfig(getState()))
         
         dispatch({
             type : UrlActionTypes.URL_LIST.SUCCESS,
@@ -37,7 +37,7 @@ export const addUrl = (values) => async (dispatch, getState) =>{
             type: UrlActionTypes.ADD.REQUEST
         })
 
-       let {data} = await axios.post(`${BASE_URL}/api/shorty/addurl`, values, getConfig(getState()))
+       let {data} = await axios.post(`${BASE_URL}/api/links/add`, values, getConfig(getState()))
        
         dispatch({
             type: UrlActionTypes.ADD.SUCCESS,
@@ -132,7 +132,7 @@ export const redirectUrl = (url) => async (dispatch)=>{
             type: UrlActionTypes.REDIRECT.REQUEST
         })
 
-       let {data} =  await axios.get(`${BASE_URL}/api/shorty/redirect/${url}`)
+       let {data} =  await axios.get(`${BASE_URL}/api/links/redirect/${url}`)
 
         dispatch({
             type: UrlActionTypes.REDIRECT.SUCCESS,

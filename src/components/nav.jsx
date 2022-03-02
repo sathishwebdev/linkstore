@@ -20,7 +20,7 @@ const NavBar = () =>{
         className='nav'
     >
     <div className="d-flex justify-content-around align-items-center " >
-    <Link to="/" style={{color:"white", textDecoration:"none"}} ><img style={{margin:"4%"}} src={logo} height="50px" alt="logo" /></Link>
+    <Link to="/" style={{color:"white", textDecoration:"none"}} ><img style={{margin:"4%"}} src={logo} height="35px" alt="logo" /></Link>
        <Link to="/" style={{color:"white", textDecoration:"none"}} > <h1 style={{marginLeft:"10px", marginTop:"10px"}} >LINK STORE</h1></Link>
     </div>
     <div className="d-flex align-items-center"  >
@@ -51,23 +51,24 @@ const NavBar = () =>{
               Login
           </SecondaryButton>
       }
-        {location.pathname === "/user/signup" 
+        
+          {location.pathname === "/user/signup" 
         ? "" 
         :  <PrimaryButton
               onClick={()=>{
                   navigate('/user/signup')
               }}
+              sx={{
+                marginRight:"20px"
+            }}
           >
               SignUp
-          </PrimaryButton>}</>
+          </PrimaryButton>}
+      </>
           
-        :
-        
-        <div style={{marginRight:"20px"}}>
-          <AccountMenu name = {user_login.name[0]} title={user_login.name} />
-        </div>
-
-        }
+        :<div style={{marginRight:"20px"}}>
+        <AccountMenu name = {user_login.name[0]} title={user_login.name} />
+        </div>}
     </div>
     </div>
      
@@ -102,7 +103,23 @@ const NavBar = () =>{
         {!navStatus ? <><Menu fontSize= "large"/>  </> :<Close sx={{color:'whitesmoke'}} fontSize='large' />}
       </IconButton>
       <Link to="/" style={{color:"white", textDecoration:"none"}} > <h1>LINK STORE</h1></Link>
-      <h5 style={{marginLeft:"auto", marginRight:"20px", color:"#a0a0a0"}} >{user_login && user_login.name }</h5>
+      {/* <h5 className="d-block d-md-none" style={{marginLeft:"auto", marginRight:"20px", color:"#a0a0a0", textTransform:"uppercase"}} >{user_login && `${user_login.name.split(' ')[0][0]} ${user_login.name.split(' ')[1][0]}`}</h5>
+      <h5 className="d-none d-md-block" style={{marginLeft:"auto", marginRight:"20px", color:"#a0a0a0", textTransform:"uppercase"}} >{user_login && user_login.name}</h5> */}
+      <div style={{marginRight:"20px", marginLeft:"auto"}}>
+          {!user_login
+           ? <SecondaryButton
+            onClick={()=>{
+                navigate('/user/login')
+            }}
+                sx={{
+                    width:"100px",
+                    borderRadius:"50px"
+                }}
+          >
+              Login
+          </SecondaryButton> 
+          : <AccountMenu name = {user_login.name[0]} title={user_login.name} />}
+      </div>
     </div>
       <div
       className='collopse-nav' id="c-nav"

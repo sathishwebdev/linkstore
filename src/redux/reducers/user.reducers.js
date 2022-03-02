@@ -2,8 +2,8 @@ import { UserActionTypes } from "../types/user.types";
 import { combineReducers } from "redux";
 
 // USER LOGIN REDUCER
-const initialState = localStorage.getItem("shorty-user")
-  ? JSON.parse(localStorage.getItem("shorty-user"))
+const initialState = localStorage.getItem("linkstore-user")
+  ? JSON.parse(localStorage.getItem("linkstore-user"))
   : null;
 
 const userLoginReducer = (state = { user_login: initialState }, action) => {
@@ -33,7 +33,7 @@ const userRegisterReducer = (state = {}, action) => {
       return { loading: true };
 
     case UserActionTypes.REGISTER.SUCCESS:
-      return { loading: false, success: true };
+      return { loading: false, success: true, response : action.payload };
 
     case UserActionTypes.REGISTER.ERROR:
       return { loading: false, error: action.payload };

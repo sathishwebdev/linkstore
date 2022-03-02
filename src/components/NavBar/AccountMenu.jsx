@@ -27,7 +27,7 @@ function AccountMenu({name, title}) {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
       >
-        <Avatar><h3>{name}</h3></Avatar>
+        <Avatar sx={{fontSize:"large"}} >{name}</Avatar>
       </IconButton>
     </Tooltip>
   </Box>

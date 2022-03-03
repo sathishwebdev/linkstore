@@ -126,7 +126,7 @@ function User() {
                                             {
                                                 urls.urls.map(({data, link, views, shorturl}, id)=>(
                                                     <div className="link-card" key ={id} >
-                                                        {!data? '' : <> 
+                                                        {!data? <a href={`https://linkru.netlify.app/${username}/${shorturl}`} target="_blank" rel="noreferrer">Link - {id+1}</a> : <> 
                                                           <div className="col-12 col-sm-3 pad">
                                                                <img src={data.og.image || data.images[0].src} alt={data.og.title || data.meta.title} />
                                                           </div>

@@ -53,37 +53,39 @@ function Links() {
                                {
                                    links.data.map(({data, link, views, shorturl}, id)=>(
                                        <div className="link-card" key ={id} >
-                                           <div className="col-12 col-sm-3 pad">
-                                                <img src={data.og.image || data.images[0].src} alt={data.og.title || data.meta.title} />
-                                           </div>
-                                           <div className="col-12 col-sm-8" style={{textAlign:"left"}}>
-                                               <h2>
-                                                   <a href={link}>{data.og.title || data.meta.title}
-                                                    </a>
-                                               </h2>
-                                                <small>
-                                                    {data.og.description || data.meta.description}
-                                                </small>
-                                          
-                                           <div className="col-12 d-flex justify-content-between align-items-center" style={{
-                                             color:"#5dfd9b"
-                                           }} >
-                                             <p style={{
-                                               padding:"1%",
-                                               margin:"1%",
+                                          { !data? '' : <>
+                                             <div className="col-12 col-sm-3 pad">
+                                                  <img src={data.og.image || data.images[0].src} alt={data.og.title || data.meta.title} />
+                                             </div>
+                                             <div className="col-12 col-sm-8" style={{textAlign:"left"}}>
+                                                 <h2>
+                                                     <a href={link}>{data.og.title || data.meta.title}
+                                                      </a>
+                                                 </h2>
+                                                  <small>
+                                                      {data.og.description || data.meta.description}
+                                                  </small>
+                                            
+                                             <div className="col-12 d-flex justify-content-between align-items-center" style={{
                                                color:"#5dfd9b"
-                                             }} >views {views} </p> 
-                                             <IconButton
-                                                onClick={()=>{share({
-                                                  title: data.og.title || data.meta.title,
-                                                  text: `${data.og.title || data.meta.title} - ${data.og.description || data.meta.description} \n\n`,
-                                                  url: `http://localhost:3000/${user_login.username}/${shorturl}`,
-                                                })}}
-                                             >
-                                               <Share/>
-                                             </IconButton>
-                                           </div>
-                                            </div>
+                                             }} >
+                                               <p style={{
+                                                 padding:"1%",
+                                                 margin:"1%",
+                                                 color:"#5dfd9b"
+                                               }} >views {views} </p>
+                                               <IconButton
+                                                  onClick={()=>{share({
+                                                    title: data.og.title || data.meta.title,
+                                                    text: `${data.og.title || data.meta.title} - ${data.og.description || data.meta.description} \n\n`,
+                                                    url: `http://localhost:3000/${user_login.username}/${shorturl}`,
+                                                  })}}
+                                               >
+                                                 <Share/>
+                                               </IconButton>
+                                             </div>
+                                              </div>
+                                          </>}
                                        </div>
                                    ))
                                }

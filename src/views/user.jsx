@@ -131,7 +131,7 @@ function User() {
                                                         </div>
                                                         <div className="col-12 col-sm-8" style={{textAlign:"left"}}>
                                                             <h2>
-                                                                <a href={`http://localhost:3000/${username}/${shorturl}`} target="_blank" rel="noreferrer">{data.og.title || data.meta.title}
+                                                                <a href={`https://linkru.netlify.app/${username}/${shorturl}`} target="_blank" rel="noreferrer">{data.og.title || data.meta.title}
                                                                  </a>
                                                             </h2>
                                                              <small>
@@ -151,7 +151,7 @@ function User() {
                                                              onClick={()=>{share({
                                                                title: data.og.title || data.meta.title,
                                                                text: `${data.og.title || data.meta.title} - ${data.og.description || data.meta.description} \n\n`,
-                                                               url: `http://localhost:3000/${username}/${shorturl}`,
+                                                               url: `https://linkru.netlify.app/${username}/${shorturl}`,
                                                              })}}
                                                           >
                                                             <Share/> 

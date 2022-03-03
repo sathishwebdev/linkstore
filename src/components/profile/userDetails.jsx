@@ -51,7 +51,7 @@ function UserDetails({user, username}) {
                 <IconButton
                     onClick={()=>{
                         share({
-                            url: `http://localhost:3000/${username}`,
+                            url: `https://linkru.netlify.app/${username}`,
                         })
                     }}
                 >

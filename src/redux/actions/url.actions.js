@@ -77,15 +77,15 @@ export const deleteUrl = (values) => async (dispatch, getState) =>{
     }
 }
 
-// GET DETAILS
+// GET URLS BY USERNAME
 
-export const getUrlDetails = (id) => async (dispatch, getState) =>{
+export const getUrls = (username) => async (dispatch) =>{
     try{
         dispatch({
             type: UrlActionTypes.DETAILS.REQUEST
         })
 
-        const {data} = await axios.get(`${BASE_URL}/api/shorty/url/${id}`, getConfig(getState()))
+        const {data} = await axios.get(`${BASE_URL}/api/links/user/${username}`)
 
         dispatch({
             type: UrlActionTypes.DETAILS.SUCCESS,

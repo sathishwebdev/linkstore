@@ -13,6 +13,7 @@ import Verification from './components/verification';
 import ForgetPassword from './views/forgetPassword';
 import ChangePassword from './views/changePassword';
 import Redirect_Url from './views/RedirectUrl';
+import User from './views/user';
 
 function App(props) {
 
@@ -39,9 +40,10 @@ function App(props) {
         <Route exact path='/:id/verify/k' element={<Verification />} /> 
         <Route exact path ="/user/forgetpassword" element={<ForgetPassword />} />
         <Route exact path = "/:userId/changepassword/k" element={<ChangePassword/>} />
-        <Route exact path="/link/:shortId" element={<Redirect_Url {...props} />}/>
+        <Route exact path="/:username/:shortId" element={<Redirect_Url {...props} />}/>
+        <Route exact path="/:username" element={<User {...props} />}/>
         
-        <Route path="*" element={<div className="header" style={{minHeight:"100vh", borderRadius:"0 0 0 70vw"}}><h1>404</h1></div>}/>
+        <Route path="*" element={<div className="header" style={{minHeight:"100vh", borderRadius:"0 0 0 70vw", color:"white"}}><h1>404</h1></div>}/>
       </Routes>
     </BrowserRouter></>
   );

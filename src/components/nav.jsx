@@ -142,6 +142,7 @@ const NavBar = () =>{
         : <SecondaryButton
             onClick={()=>{
                 navigate('/user/login')
+                CloseMenu()
             }}
                 sx={{
                     width:"100px",
@@ -156,6 +157,7 @@ const NavBar = () =>{
         :  <PrimaryButton
               onClick={()=>{
                   navigate('/user/signup')
+                  CloseMenu()
               }}
           >
               SignUp
@@ -163,7 +165,8 @@ const NavBar = () =>{
           
         :
         <Button
-        onClick={()=>{
+        onClick={ ()=>{
+          CloseMenu()
           dispatch(logout())
         }}
         sx={{

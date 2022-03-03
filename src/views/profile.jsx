@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import {Tab, Box} from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Links from "../components/profile/links";
 import UserDetails from "../components/profile/userDetails";
@@ -50,6 +49,16 @@ const Profile = (props) =>{
 
       const [value, setValue] = useState('0');
 
+      const navigate = useNavigate()
+
+      useEffect(()=>{
+          if(!user_login){
+            navigate('/')
+          }else if(!user_login.isVerified){
+            navigate('/user/verify')
+          }
+      },[user_login])
+
       const handleChange = (event, newValue) => {
         setValue(newValue);
       }
@@ -65,19 +74,20 @@ const Profile = (props) =>{
               }} >
                 <Divider sx={{color:"black"}} />
                 <div className="col-12" >
-                  <UserDetails />
+                  <UserDetails user={user_login} username={user_login? user_login.username : ""}/>
                 </div>
                 <TabContext value={value}>
   <Box>
     <StyledTabs onChange={handleChange} aria-label="Links"
     value ={value} 
     >
-      <StyledTab label="Blog Posts" value="0" />
-      <StyledTab label="Links" value="1" />
+      <StyledTab label="Links" value="0" />
+      <StyledTab label="Blog Posts" value="1" />
+      
     </StyledTabs>
   </Box>
-  <TabPanel value="0">Site map</TabPanel>
-  <TabPanel value="1">
+  <TabPanel value="1">Site map</TabPanel>
+  <TabPanel value="0">
     <div style={{maxWidth:"800px"}}>
       <Links/>
     </div>

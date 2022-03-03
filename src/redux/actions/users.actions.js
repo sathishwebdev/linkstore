@@ -21,6 +21,7 @@ export const loginUser = (values) => async (dispatch) => {
       _id: data.user.id,
       email: data.user.email,
       name: data.user.name,
+      username: data.user.username,
       isVerified: data.user.isVerified,
       token: data.token,
     };

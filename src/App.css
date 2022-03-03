@@ -52,7 +52,7 @@
 
 .header{
   padding: 2%;
-  background-color: #14a769;
+  background-color: #2c9b63;
   min-height: 70vh;
   border-radius: 0 0 0 calc(10px + 35vh);
   display: flex;
@@ -166,7 +166,7 @@ a:hover{
 
 .link-card{
   /* max-width:750px; */
-  box-shadow: 0 0 15px 1px rgb(74, 122, 74);
+  box-shadow: 0 0 15px 1px rgb(54, 83, 54);
   border: none;
   padding: 10px;
   margin: 1%;
@@ -181,5 +181,5 @@ a:hover{
   width: 100%;
 }
 small,p{
-  color:#426855;
+  color:#264636;
 }

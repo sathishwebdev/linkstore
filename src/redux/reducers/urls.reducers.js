@@ -54,16 +54,16 @@ const urlDeleteReducer = (state = {}, action) =>{
 
 // URL DETAILS
 
-const urlDetailsReducer = (state = { url: {}}, action) =>{
+const urlDetailsReducer = (state = { urls: null}, action) =>{
     switch (action.type){
         case UrlActionTypes.DETAILS.REQUEST:
             return {loading : true};
         case UrlActionTypes.DETAILS.SUCCESS:
-            return {loading: false, url : action.payload};
+            return {loading: false, success: true, urls : action.payload};
         case UrlActionTypes.DETAILS.ERROR:
             return {loading: false, error: action.payload};
         case UrlActionTypes.DETAILS.RESET:
-            return {url:{}}
+            return {urls:null}
         default:
             return state;
     }

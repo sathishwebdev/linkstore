@@ -41,7 +41,7 @@ console.log(errorRedirect)
         redirect(url.url)
     }
 
-    return <div>
+    return <div className="header" style={{borderRadius:"0 0 0 0" , minHeight:"100vh"}}>
         {loadingRedirect ? <Loader /> :
         <>
         <p>Redirecting to {url? `${`${url.url}`.substring(0, 20)}...` : ''}</p>

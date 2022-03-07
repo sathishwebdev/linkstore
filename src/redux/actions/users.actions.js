@@ -24,6 +24,7 @@ export const loginUser = (values) => async (dispatch) => {
       username: data.user.username,
       isVerified: data.user.isVerified,
       token: data.token,
+      views: data.user.views
     };
 
     dispatch({

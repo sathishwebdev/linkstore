@@ -1,21 +1,31 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/home/header'
 import { PrimaryButton } from '../components/mui/Button'
+import { Message } from '../containers'
+import { logout } from '../redux/actions/users.actions'
 
 function Home() {
     const navigate = useNavigate()
-    const {user_login } = useSelector(
+    const dispatch = useDispatch()
+    const {error, user_login } = useSelector(
         (state) => state.users.login
       );
 
       useEffect(()=>{
         if (user_login) navigate('/user/dashboard')
       },[user_login])
+
+      if(error){
+          alert("session expired");
+          dispatch(logout())
+      }
+
   return (
     <div>
-         
+         {error && <Message type="error" message={`${error} \n You need to Login again`} />}
+
         <Header />
         <div className="pad">
             <h1 >GET ANALYTICS FOR YOUR LINKS</h1>

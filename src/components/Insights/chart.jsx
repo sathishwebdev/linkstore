@@ -26,7 +26,7 @@ function Chart({insight}) {
         let day = data[0]
         let monthNum = data[1]
         let year = data[2]
-        count[day] = counts
+        count[+day-1] = counts
 
         return {
             day,
@@ -42,7 +42,6 @@ function Chart({insight}) {
         datasets: [{
             label: 'Views',
             data: count,
-            fill: {value: 8},
             backgroundColor: [
                 'lightgreen'
             ],

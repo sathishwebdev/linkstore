@@ -16,7 +16,7 @@ export const loginUser = (values) => async (dispatch) => {
       type: UserActionTypes.LOGIN.REQUEST,
     });
     const { data } = await axios.post(`${BASE_URL}/login`, values);
-    console.log(data)
+    
     const userInfo = {
       _id: data.user.id,
       email: data.user.email,
@@ -24,7 +24,7 @@ export const loginUser = (values) => async (dispatch) => {
       username: data.user.username,
       isVerified: data.user.isVerified,
       token: data.token,
-      views: data.user.views
+      views: data.user.views,
     };
 
     dispatch({
@@ -67,28 +67,28 @@ export const registerUser = (values) => async (dispatch) => {
   }
 };
 
-// export const getUsersList = () => async (dispatch, getState) => {
-//   try {
-//     dispatch({
-//       type: UserActionTypes.LIST.REQUEST,
-//     });
+export const getUsersInsight = (userId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: UserActionTypes.INSIGHT.REQUEST,
+    });
 
-//     const { data } = await axios.get(`${BASE_URL}`, getConfig(getState()));
+    const { data } = await axios.get(`${BASE_URL}/insight/${userId}`, getConfig(getState()));
 
-//     dispatch({
-//       type: UserActionTypes.LIST.SUCCESS,
-//       payload: data,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: UserActionTypes.LIST.ERROR,
-//       payload:
-//         error.response && error.response.data.detail
-//           ? error.response.data.detail
-//           : error.message,
-//     });
-//   }
-// };
+    dispatch({
+      type: UserActionTypes.INSIGHT.SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UserActionTypes.INSIGHT.ERROR,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
 
 export const deleteUsers = (users) => async (dispatch, getState) => {
   try {

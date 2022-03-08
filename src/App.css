@@ -57,7 +57,6 @@
   border-radius: 0 0 0 calc(10px + 35vh);
   display: flex;
   align-items: center;
-  color: rgb(98, 157, 245);
   justify-content: space-around;
   font-family:"advent"
 }

@@ -27,7 +27,7 @@ function UserDetails({user, username}) {
         }
       };
 
-      console.log(user)
+      
 
   return (
     <div className="pad d-flex justify-content-center align-items-center" >

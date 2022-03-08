@@ -25,6 +25,27 @@ const userLoginReducer = (state = { user_login: initialState }, action) => {
   }
 };
 
+// GET INSIGHT OF THE USER
+
+const userInsightReducer = (state = { insight: null }, action) => {
+  switch (action.type) {
+    case UserActionTypes.INSIGHT.REQUEST:
+      return { loading: true };
+
+    case UserActionTypes.INSIGHT.SUCCESS:
+      return { loading: false, insight: action.payload };
+
+    case UserActionTypes.INSIGHT.ERROR:
+      return { loading: false, error: action.payload};
+
+    case UserActionTypes.INSIGHT.RESET:
+      return {insight : null};
+
+    default:
+      return state;
+  }
+};
+
 // USER REGISTER REDUCER
 
 const userRegisterReducer = (state = {}, action) => {
@@ -139,6 +160,7 @@ const userReducers = combineReducers({
   verify : userVerifyReducer,
   forgetPassword : userForgetPassword,
   changePassword : userChangePassword,
+  insight : userInsightReducer,
 });
 
 export default userReducers;

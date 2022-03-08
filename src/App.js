@@ -14,6 +14,7 @@ import ForgetPassword from './views/forgetPassword';
 import ChangePassword from './views/changePassword';
 import Redirect_Url from './views/RedirectUrl';
 import User from './views/user';
+import Analytics from './views/analytics';
 
 function App(props) {
 
@@ -36,6 +37,7 @@ function App(props) {
         <Route exact path="/user/login" element ={<Login />} />
         <Route exact path="/user/signup" element ={<SignUp />} />
         <Route exact path="/user/dashboard" element={<Private> <Profile {...props}/></Private>} />
+        <Route exact path="/user/insights" element={<Private> <Analytics {...props}/></Private>} />
         <Route exact path="/user/verify" element={<Verify mailId={user_login ? user_login.email : ''} {...props} />}/>
         <Route exact path='/:id/verify/k' element={<Verification />} /> 
         <Route exact path ="/user/forgetpassword" element={<ForgetPassword />} />

@@ -4,6 +4,7 @@ import Chart from '../components/Insights/chart';
 import {useNavigate} from 'react-router-dom'
 import { getUsersInsight } from '../redux/actions/users.actions';
 import Message from '../containers/Message'
+import LinkTable from '../components/Insights/linkTable';
 
 function Analytics() {
 
@@ -22,7 +23,6 @@ function Analytics() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[user])
 
-
   return (
     <div className="header" style={{
       borderRadius:"0 0 0 0", 
@@ -36,12 +36,10 @@ function Analytics() {
         {error && <Message type="error" message = {error} />}
         {loading 
           ? <div className='loader'></div> 
-          : <div style={{
-            width:"100%",
-
-          }}>
-            <Chart insight = {!insight? [] : insight.data} /> 
-          </div>
+          : <>
+            <Chart insight = {!insight? [] : insight.data} views = {!insight? 0 : insight.views} /> 
+            <LinkTable data = {!insight? [] : insight.links} username = {user? user.username : 'user'} />
+          </>
         }
     </div>
   )

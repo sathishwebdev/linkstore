@@ -3,17 +3,20 @@ import { Avatar } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { getUsersInsight } from '../../redux/actions/users.actions'
 import { IconButton } from '../mui'
 
 function UserDetails({user, username}) {
     const [isAdmin, setIsAdmin] = useState(false)
     const dispatch = useDispatch()
     const{ user_login } = useSelector((state) => state.users.login);
+    const {loading, error, insight} = useSelector(state => state.users.insight)
 
 
     useEffect(() =>{
         if(user_login && user_login.username === user.username){
             setIsAdmin(true)
+            dispatch(getUsersInsight(user_login._id))
         }
 
     },[dispatch, username, user_login])
@@ -46,7 +49,7 @@ function UserDetails({user, username}) {
             <div style={{textAlign:"left"}} >
                 <h1>{user.name}</h1>
                 <small>@{user.username}</small>
-               {isAdmin? <p>Views <span style={{color:"white"}}>{user.views}</span></p> : ''}
+               {isAdmin? <p>Views <span style={{color:"white"}}>{insight && insight.views }</span></p> : ''}
             </div>
 
             <div className="pad">

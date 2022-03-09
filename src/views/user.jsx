@@ -87,7 +87,7 @@ function User() {
         <div className='header' style={{
             borderRadius: "0 0 0 0",
             minHeight:"100vh",
-            paddingTop:"80px"
+            paddingTop:"80px",
         }} >
             
             
@@ -117,8 +117,10 @@ function User() {
                                         </StyledTabs>
                                     </Box>
                                     <TabPanel value="1">
-                                        <div className="d-flex justify-content-center align-items-center">
-                                            <div className=' loader' ></div>
+                                        <div className="text-center">
+                                            <p><small style={{color:"red"}}>No Posts are here</small></p>
+                                            <br/>
+                                            <p>UNDER DEVELOPEMENT</p>
                                         </div>
                                     </TabPanel>
                                     <TabPanel value="0">

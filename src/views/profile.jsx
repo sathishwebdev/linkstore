@@ -86,7 +86,14 @@ const Profile = (props) =>{
       
     </StyledTabs>
   </Box>
-  <TabPanel value="1">Site map</TabPanel>
+  <TabPanel value="1">
+    <div style={{width:"100%",}}>
+        <h2>Blog posts</h2>
+        <small style={{color:"red"}}>UNDER DEVELOPEMENT PROCESS...</small>
+      <p>Here, you could add your blog's sitemap so we would fetch your sitemap and show your blog posts here. And you don't have to update as long as sitemap valid. It will be auto-update your blog posts</p>
+
+    </div>
+    </TabPanel>
   <TabPanel value="0">
     <div style={{maxWidth:"800px"}}>
       <Links/>

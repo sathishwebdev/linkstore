@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import {  useLocation, useNavigate, useParams } from 'react-router-dom'
 import { CustomizedSnackbars, Message } from '../containers'
 import { setSnackbar } from '../redux/actions/snackbar.actions'
-import { verifyUser } from '../redux/actions/users.actions'
+import { logout, verifyUser } from '../redux/actions/users.actions'
 
-import {PrimaryButton} from './mui/Button'
+import {PrimaryButton, SecondaryButton} from './mui/Button'
 
 function Verification() {
 
@@ -50,15 +50,16 @@ function Verification() {
                 <h1>Verification</h1>
 
                {response && !response.result && <>
-               <small>Please Login in again</small>
+               <small>Please Logut and Login in again</small>
                <br/>
-               <PrimaryButton
+               <SecondaryButton
                 onClick={()=>{
+                    dispatch(logout())
                     navigate('/user/login')
                 }}
                >
-                   Login
-               </PrimaryButton>
+                   Logout
+               </SecondaryButton>
                </>}
             </div>
             {loading && <div className="loader"></div>}

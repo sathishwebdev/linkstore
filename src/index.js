@@ -11,6 +11,20 @@ import store from "./store";
 ReactDOM.render(
   <Provider store={store}>
     <App {...store} />
+    <div style={{
+        position: "fixed",
+        bottom : "0",
+        backgroundColor: "#252525",
+        height:"50px",
+        width:"100%",
+        color:"whitesmoke",
+        textAlign:"center",
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"center",
+      }}>
+        <p>Developed by <a href="https://sathishwebdev.netlify.app" target="_blank" rel="noreferrer"> Sathish Kumar S</a>
+      </p></div>
     </Provider>,
   document.getElementById('root')
 );

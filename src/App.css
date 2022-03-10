@@ -58,7 +58,8 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  font-family:"advent"
+  font-family:"advent";
+  padding-bottom: 60px;
 }
 
 .header-img{

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Line, Doughnut} from 'react-chartjs-2'
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement} from 'chart.js'
+import { Bar,Line, Doughnut} from 'react-chartjs-2'
+import { Chart as ChartJS, Filler, BarElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement} from 'chart.js'
 
 ChartJS.register(
     CategoryScale,
@@ -13,9 +13,10 @@ ChartJS.register(
     Title,
     Tooltip,
     Legend,
+    Filler
 )
 
-function Chart({insight}) {
+function Chart({insight, links}) {
     
     const months = ["January", "February","March", "April", "May","June","July","August","September","October","November","December"]
     const thisMonth = months[new Date().getMonth()]
@@ -25,7 +26,8 @@ function Chart({insight}) {
                 count.push(0)
             }
     let dataForDoughnut = months.map((a, i)=> 0)
-    const insightDatas = insight.map(({date, counts},i)=> {
+    
+     insight.forEach(({date, counts},i)=> {
         let data = date.split('/')
         let day = data[0]
         let monthNum = data[1]
@@ -41,43 +43,43 @@ function Chart({insight}) {
             
     })
     
+    // let peakProfileView = count.reduce((acc, data)=> acc > data ? acc : data)
    
     const lineData=  {
         labels: count.map((a,i)=> i+1),
         datasets: [
             {
-                label: `Views in ${thisMonth} - ${'year'}`,
+                label: `Views in ${thisMonth} - ${new Date().getUTCFullYear()}`,
                 data: count,
-                backgroundColor: 'lightgreen',
+                fill: true,
+                backgroundColor: 'rgba(130, 255, 134, 0.24)',
                 borderColor: 'green',
-                borderWidth: 2,
-                fillColor:"blue"
+                borderWidth: 2
             }
         ]
     }
 
 
-
-
-    const doughnutData = {
-        labels: months,
+    const linksData = {
+        labels : links.map(({link},i)=> link.split('/')[2]),
         datasets: [
             {
-                label: `Views in ${'month'} - ${'year'}`,
-                data: dataForDoughnut,
+                label: `Clicks of Links`,
+                data: links.map(({views})=> views),
+                fill: true,
                 backgroundColor:[
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(255, 99, 142, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 96, 0.2)',
-                    'rgba(75, 192, 200, 0.2)',
-                    'rgba(54, 162, 255, 0.2)'
+                    'rgba(255, 99, 132, 0.24)',
+                    'rgba(255, 159, 64, 0.24)',
+                    'rgba(255, 205, 86, 0.24)',
+                    'rgba(75, 192, 192, 0.24)',
+                    'rgba(54, 162, 235, 0.24)',
+                    'rgba(153, 102, 255, 0.24)',
+                    'rgba(201, 203, 207, 0.24)',
+                    'rgba(255, 99, 142, 0.24)',
+                    'rgba(255, 159, 64, 0.24)',
+                    'rgba(255, 205, 96, 0.24)',
+                    'rgba(75, 192, 200, 0.24)',
+                    'rgba(54, 162, 255, 0.24)'
                   ],
                   borderColor: [
                     'rgb(255, 99, 132)',
@@ -93,8 +95,48 @@ function Chart({insight}) {
                     'rgba(75, 192, 200)',
                     'rgba(54, 162, 255)'
                   ],
-                borderWidth: 2,
-                fillColor:"blue"
+                borderWidth: 2
+            }
+        ]
+    }
+
+
+
+    const doughnutData = {
+        labels: months,
+        datasets: [
+            {
+                label: `Views in ${'month'} - ${'year'}`,
+                data: dataForDoughnut,
+                backgroundColor:[
+                    'rgba(255, 99, 132, 0.24)',
+                    'rgba(255, 159, 64, 0.24)',
+                    'rgba(255, 205, 86, 0.24)',
+                    'rgba(75, 192, 192, 0.24)',
+                    'rgba(54, 162, 235, 0.24)',
+                    'rgba(153, 102, 255, 0.24)',
+                    'rgba(201, 203, 207, 0.24)',
+                    'rgba(255, 99, 142, 0.24)',
+                    'rgba(255, 159, 64, 0.24)',
+                    'rgba(255, 205, 96, 0.24)',
+                    'rgba(75, 192, 200, 0.24)',
+                    'rgba(54, 162, 255, 0.24)'
+                  ],
+                  borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)',
+                    'rgba(255, 99, 142)',
+                    'rgba(255, 159, 64)',
+                    'rgba(255, 205, 96)',
+                    'rgba(75, 192, 200)',
+                    'rgba(54, 162, 255)'
+                  ],
+                borderWidth: 2
             }
         ]
     }
@@ -116,7 +158,7 @@ function Chart({insight}) {
   },
   scales:{
       y: {
-          beginAtZero : true
+          beginAtZero : true,
       },
   }
     }
@@ -134,10 +176,8 @@ function Chart({insight}) {
    
      
       return(
-            <>
-                <div style={{
-                    width:"100%"
-                }} >
+            <div className="d-flex justify-content-center align-items-center flex-wrap" style={{width:"100%"}}>
+                <div style={{width:"100%"}} >
                     <Line
                         data={lineData}
                         height={400}
@@ -145,9 +185,7 @@ function Chart({insight}) {
                         options={lineOptions}
                     />
                 </div>
-                <div style={{
-                    width:"100%"
-                }} >
+                <div style={{width:"50%", minWidth:"400px"}} >
                     <Doughnut
                         data={doughnutData}
                         height={400}
@@ -155,7 +193,15 @@ function Chart({insight}) {
                         options={doughnutOptions}
                     />
                 </div>
-            </>
+                <div style={{width:"50%", minWidth:"400px"}} >
+                    <Bar
+                        data={linksData}
+                        height={400}
+                        width={600}
+                        options={doughnutOptions}
+                    />
+                </div>
+            </div>
       )
 }
 

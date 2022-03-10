@@ -37,7 +37,7 @@ function Analytics() {
         {loading 
           ? <div className='loader'></div> 
           : <>
-            <Chart insight = {!insight? [] : insight.data} views = {!insight? 0 : insight.views} /> 
+            <Chart insight = {!insight? [] : insight.data} views = {!insight? 0 : insight.views} links= {!insight? [] : insight.links}/> 
             <LinkTable data = {!insight? [] : insight.links} username = {user? user.username : 'user'} />
           </>
         }

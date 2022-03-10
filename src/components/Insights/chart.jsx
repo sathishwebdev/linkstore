@@ -20,127 +20,118 @@ function Chart({insight, links}) {
     
     const months = ["January", "February","March", "April", "May","June","July","August","September","October","November","December"]
     const thisMonth = months[new Date().getMonth()]
+    let thisYear = new Date().getUTCFullYear()
     let today = new Date().getDate()
     const count = []
-            for(let i = today-10; i < today+5; i++){
+            for(let i = 0; i < today+5; i++){
                 count.push(0)
             }
-    let dataForDoughnut = months.map((a, i)=> 0)
-    
+    let dataOfYears = {}
+    //  generate skeleton 
+
+    insight.forEach(({date, counts},i)=> {
+        let year =  date.split('/')[2]
+        dataOfYears[year] = months.map((a, i)=> 0)
+    })
+
      insight.forEach(({date, counts},i)=> {
         let data = date.split('/')
         let day = data[0]
         let monthNum = data[1]
         let year = data[2]
-        count[+day-1] = counts
-        dataForDoughnut[monthNum-1]+= counts
-
-        return{
-                month : months[monthNum-1],
-                year,
-                count
-            }
-            
+        if(months[monthNum-1] === thisMonth && +year === thisYear){
+            count[+day-1] = counts
+        }
+        
+        dataOfYears[year][monthNum-1]+= counts            
     })
     
     // let peakProfileView = count.reduce((acc, data)=> acc > data ? acc : data)
+
    
     const lineData=  {
         labels: count.map((a,i)=> i+1),
         datasets: [
             {
-                label: `Views in ${thisMonth} - ${new Date().getUTCFullYear()}`,
+                label: `Profile Views of last 7 days (${thisMonth} - ${new Date().getUTCFullYear()})`,
                 data: count,
                 fill: true,
                 backgroundColor: 'rgba(130, 255, 134, 0.24)',
                 borderColor: 'green',
-                borderWidth: 2
+                borderWidth: 2,
+                tension: 0.5
             }
         ]
     }
 
+    const  backgroundColor = [
+        'rgba(255, 99, 132, 0.24)',
+        'rgba(255, 159, 64, 0.24)',
+        'rgba(255, 205, 86, 0.24)',
+        'rgba(75, 192, 192, 0.24)',
+        'rgba(54, 162, 235, 0.24)',
+        'rgba(153, 102, 255, 0.24)',
+        'rgba(201, 203, 207, 0.24)',
+        'rgba(255, 99, 142, 0.24)',
+        'rgba(255, 159, 64, 0.24)',
+        'rgba(255, 205, 96, 0.24)',
+        'rgba(75, 192, 200, 0.24)',
+        'rgba(54, 162, 255, 0.24)'
+      ],
+      borderColor =[
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)',
+        'rgba(255, 99, 142)',
+        'rgba(255, 159, 64)',
+        'rgba(255, 205, 96)',
+        'rgba(75, 192, 200)',
+        'rgba(54, 162, 255)'
+      ]
 
-    const linksData = {
-        labels : links.map(({link},i)=> link.split('/')[2]),
-        datasets: [
-            {
-                label: `Clicks of Links`,
-                data: links.map(({views})=> views),
-                fill: true,
-                backgroundColor:[
-                    'rgba(255, 99, 132, 0.24)',
-                    'rgba(255, 159, 64, 0.24)',
-                    'rgba(255, 205, 86, 0.24)',
-                    'rgba(75, 192, 192, 0.24)',
-                    'rgba(54, 162, 235, 0.24)',
-                    'rgba(153, 102, 255, 0.24)',
-                    'rgba(201, 203, 207, 0.24)',
-                    'rgba(255, 99, 142, 0.24)',
-                    'rgba(255, 159, 64, 0.24)',
-                    'rgba(255, 205, 96, 0.24)',
-                    'rgba(75, 192, 200, 0.24)',
-                    'rgba(54, 162, 255, 0.24)'
-                  ],
-                  borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)',
-                    'rgba(255, 99, 142)',
-                    'rgba(255, 159, 64)',
-                    'rgba(255, 205, 96)',
-                    'rgba(75, 192, 200)',
-                    'rgba(54, 162, 255)'
-                  ],
-                borderWidth: 2
-            }
-        ]
-    }
+    
+ 
+let insightDataOfYears = []
+for(let key in dataOfYears){
+    insightDataOfYears.push({
+        label: `Views in  ${key}`,
+        data: dataOfYears[key]
+    })
+}
 
 
-
-    const doughnutData = {
+    const yearData = {
         labels: months,
-        datasets: [
-            {
-                label: `Views in ${'month'} - ${'year'}`,
-                data: dataForDoughnut,
-                backgroundColor:[
-                    'rgba(255, 99, 132, 0.24)',
-                    'rgba(255, 159, 64, 0.24)',
-                    'rgba(255, 205, 86, 0.24)',
-                    'rgba(75, 192, 192, 0.24)',
-                    'rgba(54, 162, 235, 0.24)',
-                    'rgba(153, 102, 255, 0.24)',
-                    'rgba(201, 203, 207, 0.24)',
-                    'rgba(255, 99, 142, 0.24)',
-                    'rgba(255, 159, 64, 0.24)',
-                    'rgba(255, 205, 96, 0.24)',
-                    'rgba(75, 192, 200, 0.24)',
-                    'rgba(54, 162, 255, 0.24)'
-                  ],
-                  borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)',
-                    'rgba(255, 99, 142)',
-                    'rgba(255, 159, 64)',
-                    'rgba(255, 205, 96)',
-                    'rgba(75, 192, 200)',
-                    'rgba(54, 162, 255)'
-                  ],
-                borderWidth: 2
+        datasets: insightDataOfYears.map((item,i)=>{
+            return {
+                label : item.label,
+                data : item.data,
+                borderWidth : 2,
+                borderColor : i === 0 ? borderColor[i] : backgroundColor[i],
+                backgroundColor : i === 0 ? backgroundColor[i] :  borderColor[i],
+                fill: true,
+                tension: 0.5
             }
-        ]
+        })
     }
     
+    const linksData = {
+        labels : links.map(({link},i)=> `${link.split('/')[2]}`),
+        datasets: [
+            {
+                data: links.map(({views})=> views),
+                fill: true,
+                borderColor : backgroundColor.reverse(),
+                 backgroundColor : borderColor.reverse(),
+                borderWidth: 2
+            }
+        ]
+    }
+
     const lineOptions = {
         maintainAspectRatio : false,
         responsive: true,
@@ -160,6 +151,10 @@ function Chart({insight, links}) {
       y: {
           beginAtZero : true,
       },
+      x : {
+          max : today + 3,
+          min : today - 4
+      }
   }
     }
 
@@ -186,19 +181,28 @@ function Chart({insight, links}) {
                     />
                 </div>
                 <div style={{width:"50%", minWidth:"400px"}} >
-                    <Doughnut
-                        data={doughnutData}
+                    <Bar
+                        data={yearData}
                         height={400}
                         width={600}
                         options={doughnutOptions}
                     />
                 </div>
                 <div style={{width:"50%", minWidth:"400px"}} >
-                    <Bar
+                    <Doughnut
                         data={linksData}
                         height={400}
                         width={600}
-                        options={doughnutOptions}
+                        options={{
+                            maintainAspectRatio : false,
+                            responsive: true,
+                      plugins: {
+                        title: {
+                          display: true,
+                          text: `Insight for Links`,
+                        },
+                      }
+                        }}
                     />
                 </div>
             </div>

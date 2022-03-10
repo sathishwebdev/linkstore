@@ -23,7 +23,7 @@ function Chart({insight, links}) {
     let thisYear = new Date().getUTCFullYear()
     let today = new Date().getDate()
     const count = []
-            for(let i = 0; i < today+5; i++){
+            for(let i = 0; i < today; i++){
                 count.push(0)
             }
     let dataOfYears = {}
@@ -53,13 +53,13 @@ function Chart({insight, links}) {
         labels: count.map((a,i)=> i+1),
         datasets: [
             {
-                label: `Profile Views of last 7 days (${thisMonth} - ${new Date().getUTCFullYear()})`,
+                label: `Profile Views of ${thisMonth} - ${new Date().getUTCFullYear()}`,
                 data: count,
                 fill: true,
                 backgroundColor: 'rgba(130, 255, 134, 0.24)',
                 borderColor: 'green',
                 borderWidth: 2,
-                tension: 0.5
+                tension: 0.555
             }
         ]
     }
@@ -98,7 +98,7 @@ function Chart({insight, links}) {
 let insightDataOfYears = []
 for(let key in dataOfYears){
     insightDataOfYears.push({
-        label: `Views in  ${key}`,
+        label: `Views in ${key}`,
         data: dataOfYears[key]
     })
 }
@@ -107,12 +107,13 @@ for(let key in dataOfYears){
     const yearData = {
         labels: months,
         datasets: insightDataOfYears.map((item,i)=>{
+            
             return {
                 label : item.label,
                 data : item.data,
                 borderWidth : 2,
-                borderColor : i === 0 ? borderColor[i] : backgroundColor[i],
-                backgroundColor : i === 0 ? backgroundColor[i] :  borderColor[i],
+                borderColor : +item.label.split(' ')[2]=== thisYear ? "green" :  borderColor[i],
+                backgroundColor : +item.label.split(' ')[2]=== thisYear ? "green" : backgroundColor[i],
                 fill: true,
                 tension: 0.5
             }
@@ -142,19 +143,15 @@ for(let key in dataOfYears){
     filler: {
         propagate: true
     },
-    title: {
-      display: true,
-      text: `Profile Views as per Months`,
-    },
   },
   scales:{
       y: {
           beginAtZero : true,
       },
-      x : {
-          max : today + 3,
-          min : today - 4
-      }
+    //   x : {
+    //       max : today + 3,
+    //       min : today - 4
+    //   }
   }
     }
 
@@ -173,37 +170,43 @@ for(let key in dataOfYears){
       return(
             <div className="d-flex justify-content-center align-items-center flex-wrap" style={{width:"100%"}}>
                 <div style={{width:"100%"}} >
-                    <Line
-                        data={lineData}
-                        height={400}
-                        width={600}
-                        options={lineOptions}
-                    />
-                </div>
-                <div style={{width:"50%", minWidth:"400px"}} >
-                    <Bar
+                <Bar
                         data={yearData}
                         height={400}
                         width={600}
                         options={doughnutOptions}
                     />
                 </div>
-                <div style={{width:"50%", minWidth:"400px"}} >
-                    <Doughnut
-                        data={linksData}
-                        height={400}
-                        width={600}
-                        options={{
-                            maintainAspectRatio : false,
-                            responsive: true,
-                      plugins: {
-                        title: {
-                          display: true,
-                          text: `Insight for Links`,
-                        },
-                      }
-                        }}
-                    />
+                <div className="text-center" style={{width:"50%", minWidth:"400px", padding:"4%"}} >
+                    <h2>Profile Views of Month</h2>
+                <div>
+                    <Line
+                            data={lineData}
+                            height={400}
+                            width={600}
+                            options={lineOptions}
+                        />
+                </div>
+                </div>
+                <div className="text-center" style={{width:"50%", minWidth:"400px", padding:"4%"}} >
+                <h2>Total Links Views</h2>
+                    <div>
+                        <Doughnut
+                            data={linksData}
+                            height={400}
+                            width={600}
+                            options={{
+                                maintainAspectRatio : false,
+                                responsive: true,
+                          plugins: {
+                            title: {
+                              display: true,
+                              text: `Insight for Links`,
+                            },
+                          }
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
       )

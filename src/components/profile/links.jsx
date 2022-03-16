@@ -53,7 +53,23 @@ function Links() {
                                {
                                    links.data.map(({data, link, views, shorturl}, id)=>(
                                        <div className="link-card" key ={id} >
-                                          { !data? <a href={link} target="_blank" rel="noreferrer">Link - {id+1}</a> : <>
+                                          { !data? 
+                                            <>
+                                            <a href={link} target="_blank" rel="noreferrer">Unreadable Link</a> 
+                                            <p style={{
+                                                 padding:"1%",
+                                                 margin:"1%",
+                                                 color:"#5dfd9b"
+                                               }} >views {views} </p>
+                                               <IconButton
+                                                  onClick={()=>{share({
+                                                    url: `https://linkru.netlify.app/${user_login.username}/${shorturl}`,
+                                                  })}}
+                                               >
+                                                 <Share/>
+                                               </IconButton>
+                                            </>
+                                            : <>
                                              <div className="col-12 col-sm-3 pad">
                                                   <img src={data.og.image || data.images[0].src || ''} alt={data.og.title || data.meta.title || ''} />
                                              </div>
@@ -78,7 +94,7 @@ function Links() {
                                                   onClick={()=>{share({
                                                     title: data.og.title || data.meta.title,
                                                     text: `${data.og.title || data.meta.title} - ${data.og.description || data.meta.description} \n\n`,
-                                                    url: `http://localhost:3000/${user_login.username}/${shorturl}`,
+                                                    url: `https://linkru.netlify.app/${user_login.username}/${shorturl}`,
                                                   })}}
                                                >
                                                  <Share/>

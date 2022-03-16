@@ -34,7 +34,7 @@ function LinkTable({data, username}) {
                         data.map(({data, link, views, shorturl}, i)=>(
                             <tr key={i}>
                                 <td style={{maxWidth:"20px"}}>{i+1}</td>
-                                <td style={{maxWidth:"100px"}}><a className="link" href={`${link}`} target="_blank" rel="noreferrer">{data.meta.title || data.og.title || "title"}</a></td>
+                                <td style={{maxWidth:"100px"}}><a className="link" href={`${link}`} target="_blank" rel="noreferrer">{!data? "unreadable link" : data.meta ? data.meta.title : data.og? data.og.title : "title"}</a></td>
                                 <td>
                                 <IconButton
                         onClick={()=>{
